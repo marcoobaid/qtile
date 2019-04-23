@@ -10,5 +10,5 @@ For best display of the Qtile Bar, install Terminess Nerd Font. For Archlinux, i
 * Current screens are marked purple.
 
 ### Resources
-[Everything you need to know about Qtile](http://docs.qtile.org/en/latest/index.html)
-[Qtile ArchWiki](https://wiki.archlinux.org/index.php/Qtile)
+* [Everything you need to know about Qtile](http://docs.qtile.org/en/latest/index.html)
+* [Qtile ArchWiki](https://wiki.archlinux.org/index.php/Qtile)
