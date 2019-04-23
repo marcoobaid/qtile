@@ -12,4 +12,4 @@ For best display of the Qtile Bar, install Terminess Nerd Font. For Archlinux, i
 ### Resources
 * [Everything you need to know about Qtile](http://docs.qtile.org/en/latest/index.html)
 * [Qtile ArchWiki](https://wiki.archlinux.org/index.php/Qtile)
-* [Qtile in 4 Minutes](https://www.youtube.com/watch?v=r_8om4dsEmw&feature=youtu.be)
+* [Qtile in 5 Minutes](https://www.youtube.com/watch?v=r_8om4dsEmw&feature=youtu.be)
