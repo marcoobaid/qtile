@@ -1,2 +1,4 @@
 # Qtile
-Qtile configuration based on Arch Linux
+My Qtile configuration
+
+![qtile_scrot](.scrots/qtile.png)
