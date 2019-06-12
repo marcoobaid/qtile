@@ -35,7 +35,7 @@ from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
 from libqtile.manager import Qtile
 
-
+#mod4 or mod = super key
 mod = "mod4"
 mod1 = "alt"
 mod2 = "control"
@@ -90,13 +90,14 @@ keys = [
     Key([mod, "shift"], "d", lazy.spawn("dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=18'")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
-    Key([mod, "shift"], "x", lazy.shutdown()),
+    Key([mod, "control"], "r", lazy.restart()),
+    # Key([mod, "shift"], "x", lazy.shutdown()),
 
 # CONTROL + ALT KEYS
 
     Key(["mod1", "control"], "a", lazy.spawn('xfce4-appfinder')),
     Key(["mod1", "control"], "b", lazy.spawn('thunar')),
-    Key(["mod1", "control"], "c", lazy.spawn('Catfish')),
+    Key(["mod1", "control"], "c", lazy.spawn('catfish')),
     Key(["mod1", "control"], "e", lazy.spawn('evolution')),
     Key(["mod1", "control"], "f", lazy.spawn('firefox')),
     Key(["mod1", "control"], "g", lazy.spawn('chromium -no-default-browser-check')),
@@ -116,6 +117,7 @@ keys = [
 # ALT + ... KEYS
 
     Key(["mod1"], "f", lazy.spawn('variety -f')),
+    Key(["mod1"], "h", lazy.spawn('urxvt -e htop')),
     Key(["mod1"], "n", lazy.spawn('variety -n')),
     Key(["mod1"], "p", lazy.spawn('variety -p')),
     Key(["mod1"], "t", lazy.spawn('variety -t')),
@@ -259,9 +261,10 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",]
 #group_names = ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave",]
 
 group_labels = ["", "", "", "", "", "", "", "", "", "",]
+#group_labels = ["Web", "Edit", "Ink", "Gimp", "Meld", "Vlc", "VB", "Thunar", "Mail", "Music",]
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall",]
-
+#group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
 for i in range(len(group_names)):
     groups.append(
@@ -280,8 +283,10 @@ for i in groups:
         Key(["mod1"], "Tab", lazy.screen.next_group()),
         Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
 
-# MOVE WINDOW TO SELECTED WORKSPACE 1-10
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
+        #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
     ])
 
 
@@ -301,9 +306,9 @@ layouts = [
     layout.Matrix(**layout_theme),
     layout.Bsp(**layout_theme),
     layout.Floating(**layout_theme),
-    layout.Max(**layout_theme),
+    layout.RatioTile(**layout_theme),
     layout.TreeTab(font="Mono", fontsize=12, panel_width=175, bg_color="#1c1b1c", active_bg="#606060", inactive_bg="#404040", border_width=2, padding_left=6, padding_x=6, padding_y=2, vspace=2),
-    layout.Stack(autosplit="False", border_focus="#5e81ac", borderwidth=1)
+    layout.Max(**layout_theme)
 ]
 
 # COLORS FOR THE BAR
@@ -339,13 +344,6 @@ widget_defaults = init_widgets_defaults()
 def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
-              #widget.LaunchBar(
-              #          progs=[('logo', 'xdg-open http://www.arcolinux.com/', 'display Arco logo')],
-              #          background=colors[1],
-              #          #foreground = colors[1],
-              #          default_icon = '/etc/skel/.config/neofetch/arcolinux-numix.png',
-              #          padding = 0
-              #          ),
               widget.TextBox(
                         font="Arial", foreground= colors[2],
                         text="◢", fontsize=50, padding=-1
@@ -369,12 +367,6 @@ def init_widgets_list():
                         font="Arial", foreground= colors[2],
                         text="◤", fontsize=50, padding=-1
                         ),
-              #widget.Sep(
-              #          linewidth = 1,
-              #          padding = 10,
-              #          foreground = colors[2],
-              #          background = colors[1]
-              #          ),             
                widget.CurrentLayout(
                         font = "TerminessTTF Nerd Font Medium",
                         fontsize = 15,
@@ -382,7 +374,6 @@ def init_widgets_list():
                         background = colors[1]
                         ),
                widget.CurrentLayoutIcon(
-                        #custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
                         font = "TerminessTTF Nerd Font Medium",
                         fontsize = 13,
                         scale = .70
@@ -403,15 +394,6 @@ def init_widgets_list():
                         font="Arial", foreground= colors[2],
                         text="◢", fontsize=50, padding=-1
                         ),
-                       # Available apt upgrades
-               #ShellScript(
-                        #fname="aptupgrades.sh",
-                        #update_interval=600,
-                        #markup=True,
-                        #padding=1,
-                        #font="TerminessTTF Nerd Font Medium",
-                        #fontsize = 15                        
-                        #),
                widget.TextBox(
                         font = "TerminessTTF Nerd Font Medium",
                         fontsize = 13,
@@ -457,15 +439,6 @@ def init_widgets_list():
                         type = "linefill",
                         width = 60
                         ),
-                        # do not activate in Virtualbox - will break qtile
-#              widget.ThermalSensor(
-#                        foreground = colors[5],
-#                        foreground_alert = colors[6],
-#                        background = colors[1],
-#                        metric = True,
-#                        padding = 3,
-#                        threshold = 80
-#                        ),
                widget.Sep(
                         linewidth = 1,
                         padding = 10,
@@ -490,14 +463,6 @@ def init_widgets_list():
                         type = 'linefill',
                         width = 60
                         ),
-               #widget.Memory(
-               #         font="xos4 terminus",
-               #         fmt = '{MemAvailable}M/{MemTotal}M',
-               #         update_interval = 5,
-               #         fontsize = 12,
-               #         foreground = colors[1],
-               #         background = colors[2],
-               #         ),               
                widget.Sep(
                         linewidth = 1,
                         padding = 10,
@@ -548,12 +513,6 @@ def init_widgets_list():
                         font = "TerminessTTF Nerd Font Medium",
                         fontsize = 13,
                         ),
-               #widget.Sep(
-                        #linewidth = 1,
-                        #padding = 10,
-                        #foreground = colors[1],
-                        #background = colors[2]
-                        #),
                widget.TextBox(
                         font="Arial", foreground= colors[2],
                         text="◤", fontsize=50, padding=-1
@@ -564,14 +523,7 @@ def init_widgets_list():
                         icon_size=20,
                         padding = 5
                         ),              
-              #widget.LaunchBar(
-                        ##progs=[('logout', 'qshell:self.qtile.cmd_shutdown()', 'logout from qtile')],
-                        #progs=[('logout', 'oblogout', 'logout from qtile')],
-                        #background=colors[1],
-                        ##foreground = colors[1],
-                        #default_icon = '/usr/share/icons/Arc/actions/16/system-shutdown.png',
-                        #padding = 0
-                        #),
+  
               
               ]
     return widgets_list
