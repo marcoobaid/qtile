@@ -25,7 +25,7 @@ function run {
 #(sleep 2; run $HOME/.config/polybar/launch.sh) &
 
 #Marco Test
-#(sleep 2; run $HOME/.screenlayout/mylayout2.sh) &
+(sleep 2; run $HOME/.screenlayout/mylayout2.sh) &
 
 #change your keyboard if you need it
 #setxkbmap -layout be
@@ -61,4 +61,4 @@ run volumeicon &
 #run telegram-desktop &
 
 #Marco Test
-#(sleep 2; run $HOME/.screenlayout/mylayout2.sh) &
+(sleep 2; run $HOME/.screenlayout/mylayout2.sh) &
