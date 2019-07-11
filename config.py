@@ -33,7 +33,6 @@ from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
-#from libqtile.manager import Qtile
 import arcobattery
 #import arcomemory
 
@@ -347,7 +346,7 @@ def init_widgets_list():
     widgets_list = [
               widget.TextBox(
                         font="Arial", foreground= colors[2],
-                        text="◢", fontsize=50, padding=-1
+                        text="◢", fontsize=73, padding=-7
                         ),
               widget.GroupBox(font="FontAwesome",
                         fontsize = 16,
@@ -366,7 +365,7 @@ def init_widgets_list():
                         ),
                widget.TextBox(
                         font="Arial", foreground= colors[2],
-                        text="◤", fontsize=50, padding=-1
+                        text="◤", fontsize=73, padding=-7
                         ),
                widget.CurrentLayout(
                         font = "TerminessTTF Nerd Font Medium",
@@ -427,7 +426,7 @@ def init_widgets_list():
                #          ),
                widget.TextBox(
                         font="Arial", foreground= colors[2],
-                        text="◢", fontsize=50, padding=-1
+                        text="◢", fontsize=73, padding=-7
                         ),
                widget.TextBox(
                         font = "TerminessTTF Nerd Font Medium",
@@ -529,7 +528,7 @@ def init_widgets_list():
                         samples = 100,
                         line_width = 3,
                         type = 'linefill',
-                        fill_color = colors[4],
+                        #fill_color = colors[4],
                         interface = 'wlp3s0',
                         start_pos = 'bottom',
                         width = 60
@@ -558,7 +557,7 @@ def init_widgets_list():
                         ),
                widget.TextBox(
                         font="Arial", foreground= colors[2],
-                        text="◤", fontsize=50, padding=-1
+                        text="◤", fontsize=73, padding=-7
                         ),
                widget.Systray(
                         background=colors[1],
